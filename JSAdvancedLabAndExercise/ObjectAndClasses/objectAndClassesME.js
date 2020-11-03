@@ -53,6 +53,39 @@ function countWords(str) {
   
 }      
 countWords(['JS devs use Node.js for server-side JS.-- JS for devs']);  
-        
+
+function cityMarkets(input){
+    let products = new Map();
+
+    for (const line of input) {
+      let [town, product, totalIncome] = line
+      .split(/\s+->:\s+/)
+      .map(Number)
+      .reduce((a, b) => a * b);
+      //totalIncome = +amount * +price;
+
+      if (!products.has(town)) {
+        products.set(town, new Map());
+      }
+      if (!products.get(town).hasOwnProperty(product)) {
+        products.get(town)[product] = [];
+      }
+      products.get(town)[product].push(totalIncome);
+    }
+
+    for (let [town, product] of products) {
+        console.log(`Town – ${town}`);
+
+        for (let [product, totalIncome] of products.get(town)) {
+            console.log(`$$$${product} : ${totalIncome}`);
+        }
+    }
+}
+cityMarkets(['Sofia -> Laptops HP -> 200 : 2000',
+'Sofia -> Raspberry -> 200000 : 1500',
+'Sofia -> Audi Q7 -> 200 : 100000',
+'Montana -> Portokals -> 200000 : 1',
+'Montana -> Qgodas -> 20000 : 0.2',
+'Montana -> Chereshas -> 1000 : 0.3']);       
 
         
