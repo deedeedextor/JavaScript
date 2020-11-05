@@ -58,22 +58,23 @@ function cityMarkets(input){
     let products = new Map();
 
     for (const line of input) {
-      let [town, product, totalIncome] = line
-      .split(/\s+->:\s+/)
-      .map(Number)
-      .reduce((a, b) => a * b);
-      //totalIncome = +amount * +price;
+      let [town, product, countAndPrice] = line
+      .split('->');
+      let [soldCount, unitPrice] = countAndPrice
+      .split(':');
+      let totalIncome = +soldCount * +unitPrice;
 
       if (!products.has(town)) {
         products.set(town, new Map());
       }
       if (!products.get(town).hasOwnProperty(product)) {
-        products.get(town)[product] = [];
+        products.get(town).set(product, 0);
       }
-      products.get(town)[product].push(totalIncome);
+      products.get(town)
+      .set(product, products.get(town).get(product) + totalIncome);
     }
 
-    for (let [town, product] of products) {
+    for (let [town] of products) {
         console.log(`Town – ${town}`);
 
         for (let [product, totalIncome] of products.get(town)) {
