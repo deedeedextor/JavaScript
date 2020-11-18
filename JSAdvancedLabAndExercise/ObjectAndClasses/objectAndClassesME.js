@@ -87,6 +87,35 @@ cityMarkets(['Sofia -> Laptops HP -> 200 : 2000',
 'Sofia -> Audi Q7 -> 200 : 100000',
 'Montana -> Portokals -> 200000 : 1',
 'Montana -> Qgodas -> 20000 : 0.2',
-'Montana -> Chereshas -> 1000 : 0.3']);       
+'Montana -> Chereshas -> 1000 : 0.3']);   
 
+function sortFunc(a, b) {
+    if (a.length != b.length) {
+        return a.length - b.length;
+    }
+    else {
+        return a.localeCompare(b);
+    }
+}
+
+function usernames(arr){
+    let uniqueSet = new Set(arr);
+    let usernames = [...uniqueSet.keys()]
+    .sort((a, b) => sortFunc(a, b));
+
+    console.log(usernames);
+}
+usernames(['Denise',
+'Ignatius',
+'Iris',
+'Isacc',
+'Indie',
+'Dean',
+'Donatello',
+'Enfuego',
+'Benjamin',
+'Biser',
+'Bounty',
+'Renard',
+'Rot']);
         
