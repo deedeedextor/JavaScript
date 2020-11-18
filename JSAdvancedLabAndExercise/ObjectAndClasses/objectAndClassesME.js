@@ -118,4 +118,39 @@ usernames(['Denise',
 'Bounty',
 'Renard',
 'Rot']);
+
+class Rat{
+    constructor(name){
+        this.name = name;
+        this.unitedRats = [];
+    }
+
+    unite(otherRat){
+        if (otherRat instanceof Rat) {
+            this.unitedRats.push(otherRat);
+        }
+    }
+
+    getRats(){
+        return console.log(JSON.stringify(this.unitedRats));
+    }
+
+    toString(){
+        console.log(this.name);
+
+        this.unitedRats.forEach(rat => {
+            console.log(`##${rat.name}`)
+        });
+    }
+}
+
+let firstRat = new Rat("Peter");
+let secondRat = new Rat("George");
+firstRat.toString();
+firstRat.getRats();
+firstRat.unite(secondRat);
+firstRat.unite(new Rat("Alex"));
+secondRat.unite(new Rat("Alex"));
+firstRat.getRats();
+firstRat.toString();
         
